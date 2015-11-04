@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: jBCM2835
+Bundle-SymbolicName: de.fxworld.jbcm2835
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: fx-world Softwareentwicklung
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: com.sun.jna;bundle-version="4.1.0"
+Export-Package: de.fxworld.jbcm2835
