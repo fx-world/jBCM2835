@@ -189,5 +189,6 @@
 	<modules>
 		<module>plugins/de.fxworld.jbcm2835</module>
 		<module>plugins/de.fxworld.jbcm2835.tests</module>
+		<module>plugins/de.fxworld.jbcm2835.pi4j</module>
 	</modules>
 </project>
