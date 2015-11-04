@@ -45,7 +45,7 @@
 		<repository>
 			<id>horizon</id>
 			<layout>p2</layout>
-			<url>http://fx-world.no-ip.com/updates/horizon/build/updatesite/</url>
+			<url>http://horizon.fx-world.de</url>
 		</repository>
 	</repositories>
 
