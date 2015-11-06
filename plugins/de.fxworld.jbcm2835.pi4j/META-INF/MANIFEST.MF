@@ -6,4 +6,4 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: fx-world Softwareentwicklung
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: de.fxworld.jbcm2835;bundle-version="1.0.0",
- pi4j-core;bundle-version="1.1.0"
+ pi4j-core;bundle-version="1.0.0"

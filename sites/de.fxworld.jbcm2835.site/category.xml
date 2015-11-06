@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/de.fxworld.jbcm2835_1.0.0.qualifier.jar" id="de.fxworld.jbcm2835" version="1.0.0.qualifier">
+      <category name="de.fxworld.jbcm2835"/>
+   </feature>
+   <feature url="features/de.fxworld.jbcm2835.pi4j_1.0.0.qualifier.jar" id="de.fxworld.jbcm2835.pi4j" version="1.0.0.qualifier">
+      <category name="de.fxworld.jbcm2835"/>
+   </feature>
+   <category-def name="de.fxworld.jbcm2835" label="jBCM2835"/>
+</site>
