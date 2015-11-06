@@ -7,7 +7,7 @@
  	available at http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 	
 	Contributors:
-	  Pascal Weyprecht - initial API and implementation 
+	  Pascal Weyprecht - initial implementation 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -25,6 +25,7 @@
 			<organizationUrl>http://www.fx-world.de</organizationUrl>
 		</developer>
 	</developers>
+	
 	<scm>
 		<connection>scm:git:git@github.com:fx-world/jBCM2835.git</connection>
 		<developerConnection>scm:git:git@github.com:fx-world/jBCM2835.git</developerConnection>
@@ -186,9 +187,13 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
 	<modules>
 		<module>plugins/de.fxworld.jbcm2835</module>
 		<module>plugins/de.fxworld.jbcm2835.tests</module>
 		<module>plugins/de.fxworld.jbcm2835.pi4j</module>
+		<module>features/de.fxworld.jbcm2835-feature</module>
+		<module>features/de.fxworld.jbcm2835.pi4j-feature</module>
+		<module>sites/de.fxworld.jbcm2835.site</module>
 	</modules>
 </project>
