@@ -26,103 +26,68 @@
 package de.fxworld.jbcm2835;
 
 /**
- * <i>native declaration : src\main\c\bcm2835.h</i><br>
- * enum values
+ * Specifies the divider used to generate the SPI clock from the system clock.
+ * Figures below give the divider, clock period and clock frequency.
+ * Clock divided is based on nominal base clock rate of 250MHz
+ * It is reported that (contrary to the documentation) any even divider may used.
+ * The frequencies shown for each divider have been confirmed by measurement.
  */
 public enum SPIClockDivider {
-	/**
-	 * < 65536(262.144us(3.814697260kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:401</i>
-	 */
-	SPI_CLOCK_DIVIDER_65536(0),
-	/**
-	 * < 32768(131.072us(7.629394531kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:402</i>
-	 */
-	SPI_CLOCK_DIVIDER_32768(32768),
-	/**
-	 * < 16384(65.536us(15.25878906kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:403</i>
-	 */
-	SPI_CLOCK_DIVIDER_16384(16384),
-	/**
-	 * < 8192(32.768us(30/51757813kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:404</i>
-	 */
-	SPI_CLOCK_DIVIDER_8192(8192),
-	/**
-	 * < 4096(16.384us(61.03515625kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:405</i>
-	 */
-	SPI_CLOCK_DIVIDER_4096(4096),
-	/**
-	 * < 2048(8.192us(122.0703125kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:406</i>
-	 */
-	SPI_CLOCK_DIVIDER_2048(2048),
-	/**
-	 * < 1024(4.096us(244.140625kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:407</i>
-	 */
-	SPI_CLOCK_DIVIDER_1024(1024),
-	/**
-	 * < 512(2.048us(488.28125kHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:408</i>
-	 */
-	SPI_CLOCK_DIVIDER_512(512),
-	/**
-	 * < 256(1.024us(976.5625MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:409</i>
-	 */
-	SPI_CLOCK_DIVIDER_256(256),
-	/**
-	 * < 128(512ns(= 1.953125MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:410</i>
-	 */
-	SPI_CLOCK_DIVIDER_128(128),
-	/**
-	 * < 64(256ns(3.90625MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:411</i>
-	 */
-	SPI_CLOCK_DIVIDER_64(64),
-	/**
-	 * < 32(128ns(7.8125MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:412</i>
-	 */
-	SPI_CLOCK_DIVIDER_32(32),
-	/**
-	 * < 16(64ns(15.625MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:413</i>
-	 */
-	SPI_CLOCK_DIVIDER_16(16),
-	/**
-	 * < 8(32ns(31.25MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:414</i>
-	 */
-	SPI_CLOCK_DIVIDER_8(8),
-	/**
-	 * < 4(16ns(62.5MHz<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:415</i>
-	 */
-	SPI_CLOCK_DIVIDER_4(4),
-	/**
-	 * < 2(8ns(125MHz, fastest you can get<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:416</i>
-	 */
-	SPI_CLOCK_DIVIDER_2(2),
-	/**
-	 * < 1(262.144us(3.814697260kHz, same as 0/65536<br>
-	 * <i>native declaration : src\main\c\bcm2835.h:417</i>
-	 */
-	SPI_CLOCK_DIVIDER_1(1);
+
+	SPI_CLOCK_DIVIDER_65536(0, 3814.697260),
+	SPI_CLOCK_DIVIDER_32768(32768, 7629.394531),
+	SPI_CLOCK_DIVIDER_16384(16384, 15258.78906),
+	SPI_CLOCK_DIVIDER_8192(8192, 30517.57813),
+	SPI_CLOCK_DIVIDER_4096(4096, 61035.15625),
+	SPI_CLOCK_DIVIDER_2048(2048, 122070.3125),
+	SPI_CLOCK_DIVIDER_1024(1024, 244140.625),
+	SPI_CLOCK_DIVIDER_512(512, 488281.25),
+	SPI_CLOCK_DIVIDER_256(256, 976562.5),
+	SPI_CLOCK_DIVIDER_128(128, 1953125),
+	SPI_CLOCK_DIVIDER_64(64, 3906250),
+	SPI_CLOCK_DIVIDER_32(32, 7812500),
+	SPI_CLOCK_DIVIDER_16(16, 15625000),
+	SPI_CLOCK_DIVIDER_8(8, 31250000),
+	SPI_CLOCK_DIVIDER_4(4, 62500000),
+	SPI_CLOCK_DIVIDER_2(2, 125000000),
+	SPI_CLOCK_DIVIDER_1(1, 3814.697260);
 	
-	private short value;
+	private short  value;
+	private double speed;
 	
-	private SPIClockDivider(int value) {
+	private SPIClockDivider(int value, double speed) {
 		this.value = (short) value;
+		this.speed = speed;
 	}
 	
+	/**
+	 * Returns the value required for the bcm2835 API.
+	 * 
+	 * @return value
+	 */
 	public short getValue() {
 		return value;
+	}
+	
+	/**
+	 * Returns the closest clock divider for a given speed in Hz.
+	 * 
+	 * @param speed in Hz
+	 * @return the closest clock divider
+	 */
+	public static SPIClockDivider getClosest(double speed) {
+		SPIClockDivider result = SPI_CLOCK_DIVIDER_65536;
+		double          diff   = Math.abs(SPI_CLOCK_DIVIDER_65536.speed - speed);
+		
+		for (SPIClockDivider divider : values()) {
+			double newDiff = Math.abs(divider.speed - speed);
+			
+			if (newDiff < diff) {
+				diff   = newDiff;
+				result = divider;
+			}
+		}
+
+		return result;
 	}
 }
