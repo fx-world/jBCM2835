@@ -11,6 +11,7 @@ import com.pi4j.io.spi.SpiDevice;
 import com.pi4j.io.spi.SpiMode;
 
 import de.fxworld.jbcm2835.JBcm2835Library;
+import de.fxworld.jbcm2835.SPIClockDivider;
 
 public class SpiDeviceImplJBcm2835 implements SpiDevice {
 
@@ -59,30 +60,48 @@ public class SpiDeviceImplJBcm2835 implements SpiDevice {
 	public SpiDeviceImplJBcm2835(SpiChannel channel, int speed, SpiMode mode) {
 		this.channel = channel;
 		this.mode    = mode;
-		// TODO Auto-generated constructor stub
+						
+		JBcm2835Library.bcm2835_spi_setClockDivider(SPIClockDivider.getClosest(speed));
+		JBcm2835Library.bcm2835_spi_setDataMode((byte) mode.getMode());
 	}
 
 	@Override
     public ByteBuffer write(ByteBuffer data) throws IOException {
-        //return ByteBuffer.wrap(write(data.array()));
-		//JBcm2835Library.bcm2835_spi_transfernb(tbuf, rbuf, len);
-		// TODO implement method
-		return data;
+        int        length = data.limit();
+        ByteBuffer result = ByteBuffer.allocate(length);
+		
+        JBcm2835Library.bcm2835_spi_chipSelect((byte) channel.getChannel());
+		JBcm2835Library.bcm2835_spi_transfernb(data, result, length);
+		
+		return result;
     }
 	
 	@Override
 	public byte[] write(byte[] data, int start, int length) throws IOException {
+		ByteBuffer input  = ByteBuffer.wrap(data, start, length);		
+		ByteBuffer output = write(input);
+		byte[]     result = output.array();
 		
-		
-		
-		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 	
 	@Override
 	public short[] write(short[] data, int start, int length) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		ByteBuffer input      = ByteBuffer.allocate(length);		
+		ByteBuffer output     = null;
+		short[]    result     = new short[length];
+		
+		for (int i = 0; i < length; i++) {
+			input.put(i, (byte) data[start + i]);
+		}
+		
+		output = write(input);
+
+		for (int i = 0; i < length; i++) {
+			result[i] = (short) (output.get(i) & 0x00FF);
+		}
+		
+		return result;
 	}
 
 	@Override
