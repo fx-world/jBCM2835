@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.pi4j.io.spi.SpiChannel;
 import com.pi4j.io.spi.SpiDevice;
 import com.pi4j.io.spi.SpiMode;
-import com.pi4j.io.spi.impl.SpiDeviceImpl;
 
 import de.fxworld.jbcm2835.pi4j.impl.SpiDeviceImplJBcm2835;
 
