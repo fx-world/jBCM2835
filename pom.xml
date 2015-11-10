@@ -59,7 +59,6 @@
 				<extensions>true</extensions>
 			</plugin>
 
-
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
